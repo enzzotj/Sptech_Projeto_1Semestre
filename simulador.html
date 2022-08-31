@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulador financeiro</title>
+    <link rel="stylesheet" href="simulador.css">
+  </head>
+  <body>
+    
+    <header>
+
+      <div class="container_header">
+        <img src="./img/image 1.png" alt="Logo">
+        <div class="container_menu">
+          <a href="">HOME</a>
+          <a href="">CONTATO</a>
+          <a href="">SIMULADOR</a>
+          <button>LOGIN</button>
+        </div>
+      </div>
+
+    </header>
+    
+    <main>
+      <div class="container_main">
+        <div class="container_simulador">
+          <div class="container_img">
+            <img src="./img/14903901 1.png" alt="Plantacao">
+          </div>
+          <div class="simulador">
+            <div class="simulador_dados">
+
+              <h1>Simule nosso sistema para sua produção:</h1>
+              <h2 class="dados">
+                Média de tomates produzido por safra:
+              </h2>
+                <input id="producao_safra" placeholder="Sacas"/>
+                <h2>Valor comercializado por saca:</h2>
+                <input id="saca_comercializada" placeholder="R$ 0,00"/>
+                <h2>Porcentagem de perdas por safra:</h2>
+                <input id="perdas_safra" placeholder="0%" />
+                <button onclick="calculo()">
+                    Simular
+                </button>
+            </div>
+              <h2 id="mostrar_resultado" style="margin-top: 20px; color: #008900;" ></h2>
+              <div id='resultado'>
+          </div>
+        </div>
+      </div>
+
+        </main>
+      
+        <footer>
+          <p>Todos os direitos reservados.</p>
+        </footer>
+    
+  </body>
+</html>
+<script>
+  function calculo() {
+    var producao = Number(producao_safra.value);
+    var perda = Number(perdas_safra.value);
+    var comerc = Number(saca_comercializada.value);
+    var eficacia = perda * 0.8;
+    var perda_antiga = producao * perda * 0.01;
+    var perda_nova = producao * eficacia * 0.01;
+    var aproveitamento = (perda_antiga - perda_nova).toFixed();
+    var lucro = (comerc * aproveitamento).toFixed(2);
+
+
+    resultado.innerHTML = `
+                <br>
+                <span>
+              A média de tomates produzidos por safra atualmente é de
+              ${producao} sacas.</span> <br>
+              <span>
+              A porcentagem de perdas atual é de
+              ${perda}% e com a implantação do
+              nosso sistema tornará a ser no máximo
+              ${eficacia}%
+            </span>
+              <br>
+              <span>
+              Ou seja, ${aproveitamento} sacas serão aproveidas,
+              rendendo um lucro de aproximadamente de R$${lucro}
+              </span>
+    `
+    mostrar_resultado.innerHTML = `Resultado: `
+  }
+</script>
